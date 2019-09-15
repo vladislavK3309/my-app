@@ -1,0 +1,12 @@
+.friends {
+    display: grid;
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 45px 45px 45px;
+
+}
+
+.friends img {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+}
