@@ -4,26 +4,38 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 
 export default function Dialogs(props) {
-    const newMessageElement = React.createRef();
-    const addMessage = () => {
-        const text = newMessageElement.current.value;
-        alert(text)
+    let state = props.dialogsPage;
+
+    const dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
+    const messagesElements = state.messages.map(m => <Message message={m.message}/>);
+    const newMessageBody = state.newMessageBody;
+
+    let onSendMessageClick = () => {
+        props.sendMessage();
     };
-    const dialogsElements = props.state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
-    const messagesElements = props.state.messages.map(m => <Message message={m.message}/>);
+    let onNewMessageChange = (e) => {
+        let body = e.target.value;
+        props.updateNewMessageBody(body);
+    };
     return (
         <div className={d.dialogs}>
             < div className={d.dialogsItems}>
                 {dialogsElements}
             </div>
             <div className={d.messages}>
-                {messagesElements}
-            </div>
-            <div>
-                <textarea ref={newMessageElement}/>
-            </div>
-            <div>
-                <button onClick={addMessage}>отправить</button>
+                <div>{messagesElements}</div>
+                <div>
+                    <div>
+                        <textarea
+                            placeholder='enter your message'
+                            value={newMessageBody}
+                            onChange={onNewMessageChange}
+                        />
+                    </div>
+                    <div>
+                        <button onClick={onSendMessageClick}>send message</button>
+                    </div>
+                </div>
             </div>
         </div>
     )
