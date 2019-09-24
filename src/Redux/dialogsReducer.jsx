@@ -2,36 +2,39 @@ const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY';
 const SEND_MESSAGE = 'SEND-MESSAGE';
 
 let initialState = {
-    dialogsPage: {
-        messages: [
-            {message: 'hi'},
-            {message: 'how is your'},
-            {message: 'yo'},
-            {message: 'yo'},
-            {message: 'yo'}
-        ],
-        dialogs: [
-            {id: 1, name: 'demyan'},
-            {id: 2, name: 'anton'},
-            {id: 3, name: 'masha'},
-            {id: 4, name: 'katya'},
-            {id: 5, name: 'anton'}
-        ],
-        newMessageBody: ''
-    }
+    messages: [
+        {message: 'hi'},
+        {message: 'how is your'},
+        {message: 'yo'},
+        {message: 'yo'},
+        {message: 'yo'}
+    ],
+    dialogs: [
+        {id: 1, name: 'demyan'},
+        {id: 2, name: 'anton'},
+        {id: 3, name: 'masha'},
+        {id: 4, name: 'katya'},
+        {id: 5, name: 'anton'}
+    ],
+    newMessageBody: ''
 };
 
 
 export function dialogsReducer(state = initialState, action) {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
-            state.newMessageBody = action.body;
-            return state;
+            return {
+                ...state,
+                newMessageBody: action.body
+            };
+
         case SEND_MESSAGE:
             let body = state.newMessageBody;
-            state.newMessageBody = '';
-            state.messages.push({id: 6, message: body});
-            return state;
+            return {
+                ...state,
+                newMessageBody: '',
+                messages: [...state.messages, {id: 6, message: body}]
+            };
         default:
             return state
     }

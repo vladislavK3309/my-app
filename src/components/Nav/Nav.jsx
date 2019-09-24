@@ -2,7 +2,7 @@ import React from "react";
 import n from './Nav.module.css'
 import {NavLink} from "react-router-dom";
 
-export default function NavBar(props) {
+export default function NavBar() {
     return (
         <nav className={n.nav}>
             <div>
@@ -11,6 +11,9 @@ export default function NavBar(props) {
             <div>
                 <NavLink to='/dialogs'>Messages</NavLink>
             </div>
+          <div>
+            <NavLink to='/users'>Users</NavLink>
+          </div>
             <div>
                 <NavLink to='/news'>News</NavLink>
             </div>
@@ -23,7 +26,6 @@ export default function NavBar(props) {
             <div>
                 <NavLink to='/friends'>Friends</NavLink>
             </div>
-
         </nav>
     )
 }

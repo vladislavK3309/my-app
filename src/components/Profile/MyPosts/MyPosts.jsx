@@ -4,7 +4,6 @@ import Post from "./Posts/Posts";
 
 
 export default function MyPosts(props) {
-    debugger;
     const postsElements = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>);
     const newPostElement = React.createRef();
 
@@ -22,7 +21,7 @@ export default function MyPosts(props) {
                 <div>
                     <textarea
                         ref={ newPostElement }
-                        value={ props.newText }
+                        value={ props.newPostText }
                         onChange={ onPostChange }
                     />
                 </div>
