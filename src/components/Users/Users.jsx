@@ -1,55 +1,40 @@
 import React from 'react';
 import users from './Users.module.css'
+import altava from '../../assets/img/altava.png'
 
-export default function Users(props) {
-  if (props.users.length === 0) {
-    props.setUsers(
-      [
-        {
-          id: 1,
-          followed: false,
-          avatar: 'https://avatanplus.com/files/resources/small/5856893091e2d1591207e5d6.png',
-          fullName: 'ivan',
-          status: 'im a boss',
-          location: {city: 'Kirov', country: 'Russia'}
-        },
-        {
-          id: 2,
-          followed: true,
-          avatar: 'https://avatanplus.com/files/resources/small/5856893091e2d1591207e5d6.png',
-          fullName: 'anton',
-          status: 'im a boss',
-          location: {city: 'Rastov', country: 'Russia'}
-        },
-        {
-          id: 3,
-          followed: false,
-          avatar: 'https://avatanplus.com/files/resources/small/5856893091e2d1591207e5d6.png',
-          fullName: 'demian',
-          status: 'im a boss',
-          location: {city: 'jepa', country: 'Russia'}
-        },
-        {
-          id: 4,
-          followed: true,
-          avatar: 'https://avatanplus.com/files/resources/small/5856893091e2d1591207e5d6.png',
-          fullName: 'anton',
-          status: 'im a boss',
-          location: {city: 'Kirov', country: 'Russia'}
-        }
-      ]
-    );
+let Users = (props) => {
+  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+  let pages = [];
+  for (let i = 1; i <= pagesCount; i++) {
+    pages.push(i);
   }
+
   return <div>
+    <div>
+      {pages.map(p => {
+        return <span
+          className={ `${props.currentPage === p && users.selectPage} ${users.pages}` }
+          onClick={ (e) => {
+            props.onPageChanged(p);
+          }}
+        >{ p }</span>
+      })}
+    </div>
     {
-      props.users.map(u => <div key={u.id}>
+      props.users.map(u => <div key={ u.id }>
         <span>
             <div>
-                <img className={users.usersPhoto} src={u.avatar} alt='ava'/>
+                <img
+                  className = { users.usersPhoto }
+                  src = { u.photos.small != null ?
+                    u.photos.small
+                    : altava}
+                  alt='ava'
+                />
             </div>
             <div>
                 {u.followed
-                  ? <button onClick={() => {
+                  ? <button onClick={ () => {
                     props.unfollow(u.id)
                   }}>unfollow</button>
                   : <button onClick={() => {
@@ -59,14 +44,16 @@ export default function Users(props) {
             </div>
         </span>
         <span>
-            <div>{u.fullName}</div>
-            <div>{u.status}</div>
+            <div>{ u.name }</div>
+            <div>{ u.status }</div>
         </span>
         <span>
-            <div>{u.location.country}</div>
-            <div>{u.location.city}</div>
+            <div>{ 'u.location.country' }</div>
+            <div>{ 'u.location.city' }</div>
         </span>
       </div>)
     }
   </div>
-}
+};
+
+export default Users;
