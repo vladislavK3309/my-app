@@ -8,25 +8,25 @@ let Users = (props) => {
   for (let i = 1; i <= pagesCount; i++) {
     pages.push(i);
   }
-
-  return <div>
-    <div>
-      {pages.map(p => {
-        return <span
-          className={ `${props.currentPage === p && users.selectPage} ${users.pages}` }
-          onClick={ (e) => {
-            props.onPageChanged(p);
-          }}
-        >{ p }</span>
-      })}
-    </div>
-    {
-      props.users.map(u => <div key={ u.id }>
+    return <div>
+      <div>
+        {pages.map(p => {
+          return <span
+            className={`${props.currentPage === p && users.selectPage} ${users.pages}`}
+            onClick={() => {
+              props.onPageChanged(p);
+            }}
+          >{p}</span>
+        })}
+      </div>
+      {
+        props.users.map(u =>
+          <div key={u.id}>
         <span>
             <div>
                 <img
-                  className = { users.usersPhoto }
-                  src = { u.photos.small != null ?
+                  className={users.usersPhoto}
+                  src={u.photos.small != null ?
                     u.photos.small
                     : altava}
                   alt='ava'
@@ -34,7 +34,7 @@ let Users = (props) => {
             </div>
             <div>
                 {u.followed
-                  ? <button onClick={ () => {
+                  ? <button onClick={() => {
                     props.unfollow(u.id)
                   }}>unfollow</button>
                   : <button onClick={() => {
@@ -43,17 +43,18 @@ let Users = (props) => {
                 }
             </div>
         </span>
-        <span>
-            <div>{ u.name }</div>
-            <div>{ u.status }</div>
+          <span>
+            <div>{u.name}</div>
+            <div>{u.status}</div>
         </span>
-        <span>
-            <div>{ 'u.location.country' }</div>
-            <div>{ 'u.location.city' }</div>
+          <span>
+            <div>{'u.location.country'}</div>
+            <div>{'u.location.city'}</div>
         </span>
-      </div>)
-    }
-  </div>
-};
+        </div>)
+      }
+    </div>
+  };
+
 
 export default Users;
