@@ -47,5 +47,4 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   follow, unfollow, setCurrentPage,
   toggleFollowingProgress, getUsers,
-  followingInProgress
 })(UsersAPIComponent);
